@@ -46,6 +46,7 @@ class App extends Component {
 		// event handlers
 		this.ToggleDrawer = this.ToggleDrawer.bind(this);
 		this.SaveImage = this.SaveImage.bind(this);
+		this.SaveToFile = this.SaveToFile.bind(this);
 		this.NewScheme = this.NewScheme.bind(this);
 		this.NewAnimation = this.NewAnimation.bind(this);
 		this.AnimCreate = this.AnimCreate.bind(this);
@@ -230,6 +231,24 @@ class App extends Component {
 		);
 	}
 
+	SaveToFile() {
+		const tactics = this.LocalStorageSave(); // get current tactics with settings
+
+		const jsonStr = JSON.stringify(tactics, null, 2);
+		const blob = new Blob([jsonStr], { type: 'application/json' });
+		const url = URL.createObjectURL(blob);
+		const fileName = `futsal-tactics-${tactics.id || 'tactics'}.json`;
+
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = fileName;
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		URL.revokeObjectURL(url);
+	}
+
+
 	ColorPaletteEdit() {
 		this.refPaletteEditorDialog.current.Show();
 	}
@@ -333,6 +352,21 @@ class App extends Component {
 		);
 
 		this.server.Save(tactics, thumbnailBlob);
+	}
+
+	async TacticsImportFromFile(event) {
+		const file = event.target.files[0];
+		if (!file) return;
+
+		try {
+			const text = await file.text();
+			const tactics = JSON.parse(text);
+			this.editTactics(tactics, true, false);
+			this.SnackbarOpen("success", "Tactics loaded from file");
+		} catch (error) {
+			console.error("Failed to load tactics from file", error);
+			this.SnackbarOpen("error", "Failed to load tactics from file");
+		}
 	}
 
 	TacticsBrowse() {
@@ -527,7 +561,7 @@ class App extends Component {
 			return;
 		}
 		this.refAnimPlayer.current.show();
-    }
+	}
 
 	ShowHelp() {
 		this.refHelpDialog.current.Show();
@@ -556,6 +590,7 @@ class App extends Component {
 				<ThemeProvider theme={this.appTheme}>
 					<AppTools drawMode={this.state.drawMode}
 						saveImage={this.SaveImage}
+						saveToFile={this.SaveToFile}
 						animExists={this.state.pitch.AnimExists}
 						animKeyFrameCurrent={this.state.pitch.AnimKeyFrameCurrent}
 						animKeyFrameTotal={this.state.pitch.AnimKeyFrames.length}
@@ -580,6 +615,7 @@ class App extends Component {
 						save={this.showSaveDialog}
 						saveAs={this.showSaveAsDialog}
 						saveImage={this.SaveImage} 
+						saveToFile={this.SaveToFile}
 						newScheme={this.NewScheme}
 						newAnimation={this.NewAnimation}
 						deleteAnimation={this.DeleteAnimation}

@@ -297,6 +297,25 @@ class FirebaseServer {
 			console.error("Deleting user tactics thumbnail", error);
 		}
 	}
+
+	async DownloadFile(filePath, fileName) {
+		try {
+		const fileRef = refFile(this.storage, filePath);
+		const url = await getDownloadURL(fileRef);
+
+		// Create temporary link element
+		const link = document.createElement('a');
+		link.href = url;
+		link.download = fileName || filePath.split('/').pop(); // fallback filename
+
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+
+		} catch (error) {
+		console.error("Error downloading file:", error);
+		}
+	}
 }
 
 export default FirebaseServer;

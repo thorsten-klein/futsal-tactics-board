@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prepare your system
+
+```
+sudo apt install yarn
+sudo npm install --global react-scripts
+sudo npm install craco
+sudo npm install buffer
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

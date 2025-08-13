@@ -23,7 +23,7 @@ class PitchFutsal {
 		this.widthPitch = 4000; 	// pitch width in cm
 		this.heightPitch = 2000;	// pitch height in cm
 
-		this.AnimExists = false;
+		this.AnimExists = true;
 		this.AnimKeyFrameCurrent = 0;
 		this.AnimKeyFrameDuration = 1.5;	// duration of each key frame in seconds
 		this.AnimKeyFrames = [];

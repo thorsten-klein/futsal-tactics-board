@@ -191,7 +191,7 @@ DrawerMenu.defaultProps = {
 	newAnimation: null,
 	deleteAnimation: null,
 	colorPaletteEdit: null,
-	animExists: false,
+	animExists: true,
 	isSignedIn: false
 }
 

@@ -119,13 +119,13 @@ class DrawerMenu extends Component {
 						<ListItem>
 							<ListItemButton onClick={this.newAnimation} disabled={this.props.animExists}>
 								<ListItemIcon><MovieCreation /></ListItemIcon>
-								<ListItemText primary="Add animation" />
+								<ListItemText primary="Enable animation" />
 							</ListItemButton>
 						</ListItem>
 						<ListItem>
 							<ListItemButton onClick={this.deleteAnimation} disabled={!this.props.animExists}>
 								<ListItemIcon><Delete /></ListItemIcon>
-								<ListItemText primary="Remove animation" />
+								<ListItemText primary="Disable animation" />
 							</ListItemButton>
 						</ListItem>
 						<Divider />

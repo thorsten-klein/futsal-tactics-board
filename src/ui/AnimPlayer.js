@@ -37,7 +37,7 @@ class AnimPlayer extends Component {
 		this.state = {
 			isOpen: false,
 			isPlaying: false,
-			isRepeat: false,
+			isRepeat: true,
 			animTime: 0
 		}
 		this.currentTime = 0;
@@ -56,7 +56,7 @@ class AnimPlayer extends Component {
 		this.setState({ 
 			isOpen: true,
 			isPlaying: false,
-			isRepeat: false,
+			isRepeat: true,
 			animTime: 0
 		});
 		// Prepare animation for playback
@@ -74,7 +74,7 @@ class AnimPlayer extends Component {
 		this.setState({
 			isOpen: false,
 			isPlaying: false,
-			isRepeat: false,
+			isRepeat: true,
 			animTime: 0
 		});
 		// stop / cancel anim playback

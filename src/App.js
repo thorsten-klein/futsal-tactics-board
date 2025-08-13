@@ -216,10 +216,7 @@ class App extends Component {
 	}
 
 	NewAnimation() {
-		this.refConfirmDialog.current.Show(
-			"Create new animation", "Are you sure you want to create new animation?",
-			this.AnimCreate
-		);
+		this.AnimCreate();
 	}
 
 	DeleteAnimation() {

@@ -13,6 +13,9 @@ import OpenInNew from '@mui/icons-material/OpenInNew';
 import MovieCreation from '@mui/icons-material/MovieCreation';
 import Delete from '@mui/icons-material/Delete';
 import Save from '@mui/icons-material/Save';
+import SaveAs from '@mui/icons-material/SaveAs';
+import SaveAlt from '@mui/icons-material/SaveAlt';
+import FileOpen from '@mui/icons-material/FileOpen';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Palette from '@mui/icons-material/Palette';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
@@ -134,13 +137,13 @@ class DrawerMenu extends Component {
 						</ListItem>
 						<ListItem>
 							<ListItemButton onClick={this.saveAs} disabled={!this.props.isSignedIn}>
-								<ListItemIcon><Save /></ListItemIcon>
+								<ListItemIcon><SaveAs /></ListItemIcon>
 								<ListItemText primary="Save As" />
 							</ListItemButton>
 						</ListItem>
 						<ListItem>
 							<ListItemButton onClick={this.saveToFile}>
-								<ListItemIcon><Save to file/></ListItemIcon>
+								<ListItemIcon><SaveAlt /></ListItemIcon>
 								<ListItemText primary="Save to file" />
 							</ListItemButton>
 						</ListItem>

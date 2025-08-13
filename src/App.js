@@ -222,12 +222,15 @@ class App extends Component {
 	}
 
 	SaveImage() {
+	    const tactics = this.LocalStorageSave(); // get current tactics with settings
+		const fileName = `futsal-tactics-${tactics.id || 'tactic'}.png`;
 		console.log("App save image");
 		let svg = this.refPitchEdit.current.getSVG();
 		this.refSvgToImg.current.toImg(
 			svg.svgText, 
 			svg.width, svg.height, 
-			svg.width/2, svg.height/2
+			svg.width/2, svg.height/2,
+			fileName
 		);
 	}
 
@@ -237,7 +240,7 @@ class App extends Component {
 		const jsonStr = JSON.stringify(tactics, null, 2);
 		const blob = new Blob([jsonStr], { type: 'application/json' });
 		const url = URL.createObjectURL(blob);
-		const fileName = `futsal-tactics-${tactics.id || 'tactics'}.json`;
+		const fileName = `futsal-tactics-${tactics.id || 'tactic'}.json`;
 
 		const a = document.createElement('a');
 		a.href = url;

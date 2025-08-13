@@ -39,10 +39,11 @@ class SvgToImg extends Component {
 	}
 
 	// save image from svg text to file
-	async toImg(svgText, orgWidth, orgHeight, imgWidth, imgHeight) {
+	async toImg(svgText, orgWidth, orgHeight, imgWidth, imgHeight, fileName) {
+		// const fileName = `futsal-tactics-${svgText}.png`;
 		try {
 			const blob = await this.toBlob(svgText, orgWidth, orgHeight, imgWidth, imgHeight);
-			FileSaver.saveAs(blob, "tactics-board.png");
+			FileSaver.saveAs(blob, fileName);
 		} catch (error) {
 			console.error("Error saving image",error);			
 		}

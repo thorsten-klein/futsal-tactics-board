@@ -47,6 +47,7 @@ class App extends Component {
 		this.ToggleDrawer = this.ToggleDrawer.bind(this);
 		this.SaveImage = this.SaveImage.bind(this);
 		this.SaveToFile = this.SaveToFile.bind(this);
+		this.LoadFromFile = this.LoadFromFile.bind(this);
 		this.NewScheme = this.NewScheme.bind(this);
 		this.NewAnimation = this.NewAnimation.bind(this);
 		this.AnimCreate = this.AnimCreate.bind(this);
@@ -114,7 +115,7 @@ class App extends Component {
 		this.drawMode = new DrawMode();
 		this.drawMode.onModified = this.OnDrawModeModified;
 		this.state = {
-    		boardName: 'Unnamed Board',
+			boardName: 'Unnamed Board',
 			currentUser: null,
 			pitch: this.pitch,
 			drawMode: this.drawMode,
@@ -127,7 +128,9 @@ class App extends Component {
 	}
 
 	handleBoardNameChange = (newName) => {
-		this.setState({ boardName: newName });
+		this.setState({ boardName: newName }, () => {
+			this.LocalStorageSave();
+		});
 	};
 
 	componentDidMount() {
@@ -259,6 +262,26 @@ class App extends Component {
 		URL.revokeObjectURL(url);
 	}
 
+	LoadFromFile() {
+		console.log("LoadFromFile is called");
+		// Create a hidden file input if not already present
+		if (!this.fileInput) {
+			this.fileInput = document.createElement('input');
+			this.fileInput.type = 'file';
+			this.fileInput.accept = '.json,application/json';
+			this.fileInput.style.display = 'none';
+			this.fileInput.addEventListener('change', (event) => {
+				this.TacticsImportFromFile(event);
+				this.fileInput.value = ''; // reset for next use
+			});
+			document.body.appendChild(this.fileInput);
+		}
+		console.log("fileInput.click()");
+		console.log(this.fileInput);
+		this.fileInput.click();
+		console.log("LoadFromFile finished");
+	}
+
 
 	ColorPaletteEdit() {
 		this.refPaletteEditorDialog.current.Show();
@@ -373,6 +396,10 @@ class App extends Component {
 			const text = await file.text();
 			const tactics = JSON.parse(text);
 			this.editTactics(tactics, true, false);
+			// Set boardName to tactics.name if present
+			if (tactics.name) {
+				this.setState({ boardName: tactics.name });
+			}
 			this.SnackbarOpen("success", "Tactics loaded from file");
 		} catch (error) {
 			console.error("Failed to load tactics from file", error);
@@ -461,6 +488,9 @@ class App extends Component {
 				tactics.settings.playerColors,
 				tactics.settings.ballColors
 			);
+		}
+		if (tactics.name) {
+			this.setState({ boardName: tactics.name });
 		}
 	}
 
@@ -603,6 +633,7 @@ class App extends Component {
 					<AppTools drawMode={this.state.drawMode}
 						saveImage={this.SaveImage}
 						saveToFile={this.SaveToFile}
+						loadFromFile={this.LoadFromFile}
 						animExists={this.state.pitch.AnimExists}
 						animKeyFrameCurrent={this.state.pitch.AnimKeyFrameCurrent}
 						animKeyFrameTotal={this.state.pitch.AnimKeyFrames.length}
@@ -630,6 +661,7 @@ class App extends Component {
 						saveAs={this.showSaveAsDialog}
 						saveImage={this.SaveImage} 
 						saveToFile={this.SaveToFile}
+						loadFromFile={this.LoadFromFile}
 						newScheme={this.NewScheme}
 						newAnimation={this.NewAnimation}
 						deleteAnimation={this.DeleteAnimation}

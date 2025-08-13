@@ -31,6 +31,7 @@ class DrawerMenu extends Component {
 		this.save = this.save.bind(this);
 		this.saveAs = this.saveAs.bind(this);
 		this.saveToFile = this.saveToFile.bind(this);
+		this.loadFromFile = this.loadFromFile.bind(this);
 		this.saveImage = this.saveImage.bind(this);
 		this.colorPaletteEdit = this.colorPaletteEdit.bind(this);
 		this.state = {
@@ -84,6 +85,11 @@ class DrawerMenu extends Component {
 	saveToFile() {
 		this.setDrawer(false);
 		this.props.saveToFile();
+	}
+
+	loadFromFile() {
+		this.setDrawer(false);
+		this.props.loadFromFile();
 	}
 
 	saveImage() {
@@ -147,6 +153,12 @@ class DrawerMenu extends Component {
 								<ListItemText primary="Save to file" />
 							</ListItemButton>
 						</ListItem>
+						<ListItem>
+							<ListItemButton onClick={this.loadFromFile}>
+								<ListItemIcon><FileOpen /></ListItemIcon>
+								<ListItemText primary="Load from file" />
+							</ListItemButton>
+						</ListItem>
 						<Divider />
 						<ListItem>
 							<ListItemButton onClick={this.saveImage}>
@@ -173,6 +185,7 @@ DrawerMenu.defaultProps = {
 	save: null,
 	saveAs: null,
 	saveToFile: null,
+	loadFromFile: null,
 	saveImage: null,
 	newScheme: null,
 	newAnimation: null,
@@ -187,6 +200,7 @@ DrawerMenu.propTypes = {
 	save: PropTypes.func,
 	saveAs: PropTypes.func,
 	saveToFile: PropTypes.func,
+	loadFromFile: PropTypes.func,
 	saveImage: PropTypes.func,
 	newScheme: PropTypes.func,
 	newAnimation: PropTypes.func,

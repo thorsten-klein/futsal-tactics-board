@@ -114,6 +114,7 @@ class App extends Component {
 		this.drawMode = new DrawMode();
 		this.drawMode.onModified = this.OnDrawModeModified;
 		this.state = {
+    		boardName: 'Unnamed Board',
 			currentUser: null,
 			pitch: this.pitch,
 			drawMode: this.drawMode,
@@ -124,6 +125,10 @@ class App extends Component {
 			}
 		}
 	}
+
+	handleBoardNameChange = (newName) => {
+		this.setState({ boardName: newName });
+	};
 
 	componentDidMount() {
 		// mount handler for authentication
@@ -222,8 +227,9 @@ class App extends Component {
 	}
 
 	SaveImage() {
-	    const tactics = this.LocalStorageSave(); // get current tactics with settings
-		const fileName = `futsal-tactics-${tactics.id || 'tactic'}.png`;
+		const tactics = this.LocalStorageSave(); // get current tactics with settings
+		const sanitizeFileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_');
+		const fileName = `${sanitizeFileName(tactics.name)}.png`;
 		console.log("App save image");
 		let svg = this.refPitchEdit.current.getSVG();
 		this.refSvgToImg.current.toImg(
@@ -240,7 +246,9 @@ class App extends Component {
 		const jsonStr = JSON.stringify(tactics, null, 2);
 		const blob = new Blob([jsonStr], { type: 'application/json' });
 		const url = URL.createObjectURL(blob);
-		const fileName = `futsal-tactics-${tactics.id || 'tactic'}.json`;
+
+		const sanitizeFileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_');
+		const fileName = `${sanitizeFileName(tactics.name)}.json`;
 
 		const a = document.createElement('a');
 		a.href = url;
@@ -432,6 +440,7 @@ class App extends Component {
 			playerColors: this.state.drawMode.colorOptionsPlayer,
 			ballColors: this.state.drawMode.colorOptionsBall,
 		}
+		tactics.name = this.state.boardName
 		localStorage.setItem("tactics-board-current", JSON.stringify(tactics));
 		return tactics;
 	}
@@ -603,6 +612,8 @@ class App extends Component {
 						animKeyFramePrevious={this.AnimKeyFramePrevious}
 						animKeyFrameDurationSet={this.AnimKeyFrameDurationSet}
 						animPlayerShow={this.animPlayerShow}
+						boardName={this.state.boardName}
+						onBoardNameChange={this.handleBoardNameChange}
 						extrasCreate={this.ExtrasCreate}
 						toggleDrawer={this.ToggleDrawer}
 						shareTactics={this.ShareTactics}

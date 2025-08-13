@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import ArrowForward from '@mui/icons-material/ArrowForward';
-import Movie from '@mui/icons-material/Movie';
+import PlayCircle from '@mui/icons-material/PlayCircle';
 import Add from '@mui/icons-material/Add';
 import Delete from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
@@ -88,12 +88,16 @@ class AnimControls extends Component {
 						<Select
 							id="frameDurationSelect"
 							onChange={this.handleChange}
-							defaultValue={5}>
-							<MenuItem value={1}>1</MenuItem>
-							<MenuItem value={3}>3</MenuItem>
-							<MenuItem value={5}>5</MenuItem>
-							<MenuItem value={7}>7</MenuItem>
-							<MenuItem value={10}>10</MenuItem>
+							//defaultValue={5.0}>
+							value={this.props.keyFrameDuration|| 1.5 }>
+							<MenuItem value={0.5}>0.5</MenuItem>
+							<MenuItem value={1.0}>1.0</MenuItem>
+							<MenuItem value={1.5}>1.5</MenuItem>
+							<MenuItem value={2.0}>2.0</MenuItem>
+							<MenuItem value={3.0}>3.0</MenuItem>
+							<MenuItem value={5.0}>5.0</MenuItem>
+							<MenuItem value={7.0}>7.0</MenuItem>
+							<MenuItem value={10.0}>10.0</MenuItem>
 						</Select>
 					</FormControl>
 				</Tooltip>
@@ -101,7 +105,7 @@ class AnimControls extends Component {
 				<Tooltip title="Play Animation">
 					<span>
 						<IconButton aria-label="Play Animation" color="inherit" onClick={this.props.animPlayerShow} disabled={this.playDisabled()}>
-							<Movie />
+							<PlayCircle />
 						</IconButton>
 					</span>
 				</Tooltip>

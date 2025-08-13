@@ -225,8 +225,10 @@ class AnimPlayer extends Component {
 		return (
 			<Popover open={this.state.isOpen}
 				onClose={this.handleClose}
-				anchorEl={this.props.anchorEl}
-				anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+				//anchorEl={this.props.anchorEl}
+				//anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+				anchorReference="anchorPosition"
+				anchorPosition={{ top: 70, left: window.innerWidth / 2 }}
 				transformOrigin={{horizontal: 'center', vertical: 'top'}}
 			>
 				<Grid container alignItems="center">

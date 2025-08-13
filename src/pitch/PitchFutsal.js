@@ -25,7 +25,7 @@ class PitchFutsal {
 
 		this.AnimExists = false;
 		this.AnimKeyFrameCurrent = 0;
-		this.AnimKeyFrameDuration = 5;	// duration of each key frame in seconds
+		this.AnimKeyFrameDuration = 1.5;	// duration of each key frame in seconds
 		this.AnimKeyFrames = [];
 		this.AnimPlaying = false;
 		this.AnimShowPaths = false;
@@ -232,7 +232,7 @@ class PitchFutsal {
 
 		this.AnimExists = data.AnimExists;
 		this.AnimKeyFrameCurrent = data.AnimKeyFrameCurrent;
-		this.AnimKeyFrameDuration = data.AnimKeyFrameDuration;
+		this.AnimKeyFrameDuration = data.AnimKeyFrameDuration || 1.5 ;
 		this.AnimKeyFrames = data.AnimKeyFrames.map(kf => {
 			let k = new AnimKeyFrame(null, null, null, null);
 			k.load(kf);
@@ -348,7 +348,7 @@ class PitchFutsal {
 	animDelete() {
 		this.AnimExists = false;
 		this.AnimKeyFrameCurrent = 0;
-		this.AnimKeyFrameDuration = 5;
+		this.AnimKeyFrameDuration = 1.5;
 		// keep only 1 key frame
 		this.AnimKeyFrames = [
 			this.AnimKeyFrames[0]
@@ -357,7 +357,7 @@ class PitchFutsal {
 	}
 
 	animKeyFrameDurationSet(duration) {
-		let newDuration = parseInt(duration);
+		let newDuration = parseFloat(duration);
 		this.AnimKeyFrameDuration = isNaN(newDuration) ? 1 : newDuration;
 		if (0 >= this.AnimKeyFrameDuration) {
 			this.AnimKeyFrameDuration = 1;

@@ -46,6 +46,7 @@ class App extends Component {
 		// event handlers
 		this.ToggleDrawer = this.ToggleDrawer.bind(this);
 		this.SaveImage = this.SaveImage.bind(this);
+		this.SaveToFile = this.SaveToFile.bind(this);
 		this.NewScheme = this.NewScheme.bind(this);
 		this.NewAnimation = this.NewAnimation.bind(this);
 		this.AnimCreate = this.AnimCreate.bind(this);
@@ -113,6 +114,7 @@ class App extends Component {
 		this.drawMode = new DrawMode();
 		this.drawMode.onModified = this.OnDrawModeModified;
 		this.state = {
+    		boardName: 'Unnamed Board',
 			currentUser: null,
 			pitch: this.pitch,
 			drawMode: this.drawMode,
@@ -123,6 +125,10 @@ class App extends Component {
 			}
 		}
 	}
+
+	handleBoardNameChange = (newName) => {
+		this.setState({ boardName: newName });
+	};
 
 	componentDidMount() {
 		// mount handler for authentication
@@ -221,14 +227,38 @@ class App extends Component {
 	}
 
 	SaveImage() {
+		const tactics = this.LocalStorageSave(); // get current tactics with settings
+		const sanitizeFileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_');
+		const fileName = `${sanitizeFileName(tactics.name)}.png`;
 		console.log("App save image");
 		let svg = this.refPitchEdit.current.getSVG();
 		this.refSvgToImg.current.toImg(
 			svg.svgText, 
 			svg.width, svg.height, 
-			svg.width/2, svg.height/2
+			svg.width/2, svg.height/2,
+			fileName
 		);
 	}
+
+	SaveToFile() {
+		const tactics = this.LocalStorageSave(); // get current tactics with settings
+
+		const jsonStr = JSON.stringify(tactics, null, 2);
+		const blob = new Blob([jsonStr], { type: 'application/json' });
+		const url = URL.createObjectURL(blob);
+
+		const sanitizeFileName = (name) => name.replace(/[\/\\:*?"<>|]/g, '_');
+		const fileName = `${sanitizeFileName(tactics.name)}.json`;
+
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = fileName;
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		URL.revokeObjectURL(url);
+	}
+
 
 	ColorPaletteEdit() {
 		this.refPaletteEditorDialog.current.Show();
@@ -335,6 +365,21 @@ class App extends Component {
 		this.server.Save(tactics, thumbnailBlob);
 	}
 
+	async TacticsImportFromFile(event) {
+		const file = event.target.files[0];
+		if (!file) return;
+
+		try {
+			const text = await file.text();
+			const tactics = JSON.parse(text);
+			this.editTactics(tactics, true, false);
+			this.SnackbarOpen("success", "Tactics loaded from file");
+		} catch (error) {
+			console.error("Failed to load tactics from file", error);
+			this.SnackbarOpen("error", "Failed to load tactics from file");
+		}
+	}
+
 	TacticsBrowse() {
 		if (!this.isSignedIn) {
 			console.error("User is not signed in");
@@ -395,6 +440,7 @@ class App extends Component {
 			playerColors: this.state.drawMode.colorOptionsPlayer,
 			ballColors: this.state.drawMode.colorOptionsBall,
 		}
+		tactics.name = this.state.boardName
 		localStorage.setItem("tactics-board-current", JSON.stringify(tactics));
 		return tactics;
 	}
@@ -527,7 +573,7 @@ class App extends Component {
 			return;
 		}
 		this.refAnimPlayer.current.show();
-    }
+	}
 
 	ShowHelp() {
 		this.refHelpDialog.current.Show();
@@ -556,6 +602,7 @@ class App extends Component {
 				<ThemeProvider theme={this.appTheme}>
 					<AppTools drawMode={this.state.drawMode}
 						saveImage={this.SaveImage}
+						saveToFile={this.SaveToFile}
 						animExists={this.state.pitch.AnimExists}
 						animKeyFrameCurrent={this.state.pitch.AnimKeyFrameCurrent}
 						animKeyFrameTotal={this.state.pitch.AnimKeyFrames.length}
@@ -565,6 +612,8 @@ class App extends Component {
 						animKeyFramePrevious={this.AnimKeyFramePrevious}
 						animKeyFrameDurationSet={this.AnimKeyFrameDurationSet}
 						animPlayerShow={this.animPlayerShow}
+						boardName={this.state.boardName}
+						onBoardNameChange={this.handleBoardNameChange}
 						extrasCreate={this.ExtrasCreate}
 						toggleDrawer={this.ToggleDrawer}
 						shareTactics={this.ShareTactics}
@@ -580,6 +629,7 @@ class App extends Component {
 						save={this.showSaveDialog}
 						saveAs={this.showSaveAsDialog}
 						saveImage={this.SaveImage} 
+						saveToFile={this.SaveToFile}
 						newScheme={this.NewScheme}
 						newAnimation={this.NewAnimation}
 						deleteAnimation={this.DeleteAnimation}

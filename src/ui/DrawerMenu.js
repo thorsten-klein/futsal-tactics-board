@@ -13,6 +13,9 @@ import OpenInNew from '@mui/icons-material/OpenInNew';
 import MovieCreation from '@mui/icons-material/MovieCreation';
 import Delete from '@mui/icons-material/Delete';
 import Save from '@mui/icons-material/Save';
+import SaveAs from '@mui/icons-material/SaveAs';
+import SaveAlt from '@mui/icons-material/SaveAlt';
+import FileOpen from '@mui/icons-material/FileOpen';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Palette from '@mui/icons-material/Palette';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
@@ -27,6 +30,7 @@ class DrawerMenu extends Component {
 		this.load = this.load.bind(this);
 		this.save = this.save.bind(this);
 		this.saveAs = this.saveAs.bind(this);
+		this.saveToFile = this.saveToFile.bind(this);
 		this.saveImage = this.saveImage.bind(this);
 		this.colorPaletteEdit = this.colorPaletteEdit.bind(this);
 		this.state = {
@@ -75,6 +79,11 @@ class DrawerMenu extends Component {
 	saveAs() {
 		this.setDrawer(false);
 		this.props.saveAs();
+	}
+
+	saveToFile() {
+		this.setDrawer(false);
+		this.props.saveToFile();
 	}
 
 	saveImage() {
@@ -128,13 +137,19 @@ class DrawerMenu extends Component {
 						</ListItem>
 						<ListItem>
 							<ListItemButton onClick={this.saveAs} disabled={!this.props.isSignedIn}>
-								<ListItemIcon><Save /></ListItemIcon>
+								<ListItemIcon><SaveAs /></ListItemIcon>
 								<ListItemText primary="Save As" />
+							</ListItemButton>
+						</ListItem>
+						<ListItem>
+							<ListItemButton onClick={this.saveToFile}>
+								<ListItemIcon><SaveAlt /></ListItemIcon>
+								<ListItemText primary="Save to file" />
 							</ListItemButton>
 						</ListItem>
 						<Divider />
 						<ListItem>
-							<ListItemButton onClick={this.saveImage} disabled={!this.props.isSignedIn}>
+							<ListItemButton onClick={this.saveImage}>
 								<ListItemIcon><PhotoCamera /></ListItemIcon>
 								<ListItemText primary="Screenshot" />
 							</ListItemButton>
@@ -157,6 +172,7 @@ DrawerMenu.defaultProps = {
 	load: null,
 	save: null,
 	saveAs: null,
+	saveToFile: null,
 	saveImage: null,
 	newScheme: null,
 	newAnimation: null,
@@ -170,6 +186,7 @@ DrawerMenu.propTypes = {
 	load: PropTypes.func,
 	save: PropTypes.func,
 	saveAs: PropTypes.func,
+	saveToFile: PropTypes.func,
 	saveImage: PropTypes.func,
 	newScheme: PropTypes.func,
 	newAnimation: PropTypes.func,

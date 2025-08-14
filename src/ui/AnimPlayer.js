@@ -69,6 +69,21 @@ class AnimPlayer extends Component {
 		window.requestAnimationFrame(this.animStep);
 	}
 
+	downloadGif() {
+	}
+
+	async downloadVideo() {
+		if (!this.props.pitch || typeof this.props.pitch.downloadAnimationWebm !== 'function') {
+			alert('Pitch object not available!');
+			return;
+		}
+		await this.props.pitch.downloadAnimationWebm(
+			this.props.animFrame, // callback to render each frame
+			this.props.keyFramesNo,
+			this.props.keyFrameDuration
+		);
+	}
+
 	handleClose() {
 		// close player
 		this.setState({

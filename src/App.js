@@ -70,6 +70,8 @@ class App extends Component {
 		this.AnimShowPaths=this.AnimShowPaths.bind(this);
 		this.animPlayerAnchorEl=this.animPlayerAnchorEl.bind(this);
 		this.animPlayerShow=this.animPlayerShow.bind(this);
+		this.animDownloadGif=this.animDownloadGif.bind(this);
+		this.animDownloadVideo=this.animDownloadVideo.bind(this);
 		this.LocalStorageLoad = this.LocalStorageLoad.bind(this);
 		this.LocalStorageSave = this.LocalStorageSave.bind(this);
 		this.LocalStorageDelete = this.LocalStorageDelete.bind(this);
@@ -602,6 +604,22 @@ class App extends Component {
 		this.refAnimPlayer.current.show();
 	}
 
+	animDownloadGif() {
+		if (this.state.pitch.AnimKeyFrames.length < 2) {
+			this.SnackbarOpen("warning", "No animation is created");
+			return;
+		}
+		this.refAnimPlayer.current.downloadGif();
+	}
+
+	animDownloadVideo() {
+		if (this.state.pitch.AnimKeyFrames.length < 2) {
+			this.SnackbarOpen("warning", "No animation is created");
+			return;
+		}
+		this.refAnimPlayer.current.downloadVideo();
+	}
+
 	ShowHelp() {
 		this.refHelpDialog.current.Show();
 	}
@@ -640,6 +658,8 @@ class App extends Component {
 						animKeyFramePrevious={this.AnimKeyFramePrevious}
 						animKeyFrameDurationSet={this.AnimKeyFrameDurationSet}
 						animPlayerShow={this.animPlayerShow}
+						animDownloadGif={this.animDownloadGif}
+						animDownloadVideo={this.animDownloadVideo}
 						boardName={this.state.boardName}
 						onBoardNameChange={this.handleBoardNameChange}
 						extrasCreate={this.ExtrasCreate}
@@ -668,8 +688,9 @@ class App extends Component {
 					/>
 					<PitchEdit ref={this.refPitchEdit} pitch={this.state.pitch} drawMode={this.state.drawMode} centerADURL={this.config.pitchCenterADURL} />
 					<SiteLogo logoURL={this.config.siteLogoURL} logoLink={this.config.siteHomeURL} />
-					<AnimPlayer ref={this.refAnimPlayer} 
+					<AnimPlayer ref={this.refAnimPlayer}
 						anchorEl={this.animPlayerAnchorEl}
+						pitch={this.state.pitch}
 						keyFramesNo={this.state.pitch.AnimKeyFrames.length}
 						keyFrameDuration={this.state.pitch.AnimKeyFrameDuration}
 						pathsVisible={this.state.pitch.AnimShowPaths}

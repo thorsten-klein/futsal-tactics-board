@@ -4,12 +4,14 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import PlayCircle from '@mui/icons-material/PlayCircle';
+import Gif from '@mui/icons-material/Gif';
 import Add from '@mui/icons-material/Add';
 import Delete from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { FileDownload } from 'mdi-material-ui';
 
 class AnimControls extends Component {
 
@@ -109,6 +111,23 @@ class AnimControls extends Component {
 						</IconButton>
 					</span>
 				</Tooltip>
+
+				<Tooltip title="Download as gif">
+					<span>
+						<IconButton aria-label="Download as gif" color="inherit" onClick={this.props.animDownloadGif} disabled={this.playDisabled()}>
+							<Gif />
+						</IconButton>
+					</span>
+				</Tooltip>
+
+				<Tooltip title="Download as video">
+					<span>
+						<IconButton aria-label="Download as video" color="inherit" onClick={this.props.animDownloadVideo} disabled={this.playDisabled()}>
+							<FileDownload />
+						</IconButton>
+					</span>
+				</Tooltip>
+
 			</React.Fragment>
 		);
 	}
@@ -122,7 +141,9 @@ AnimControls.defaultProps = {
 	keyFrameNext: null,
 	keyFramePrevious: null,
 	keyFrameDurationSet: null,
-	animPlayerShow: null
+	animPlayerShow: null,
+	animDownloadGif: null,
+	animDownloadVideo: null
 }
 
 AnimControls.propTypes = {
@@ -133,7 +154,9 @@ AnimControls.propTypes = {
 	keyFrameNext: PropTypes.func,
 	keyFramePrevious: PropTypes.func,
 	keyFrameDurationSet: PropTypes.func,
-	animPlayerShow: PropTypes.func
+	animPlayerShow: PropTypes.func,
+	animDownloadGif: PropTypes.func,
+	animDownloadVideo: PropTypes.func
 }
 
 export default AnimControls;

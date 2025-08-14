@@ -480,11 +480,73 @@ class PitchFutsal {
 			keyFrameShow = this.AnimKeyFrames.length - 1;
 			kfPos = 1.0;
 		}
+		console.log(this.AnimKeyFrames);
+		console.log(this.AnimKeyFrames[keyFrameShow]);
 		this.AnimPlayers = this.AnimKeyFrames[keyFrameShow].animatePlayersOnPaths(kfPos);
 		this.AnimBalls = this.AnimKeyFrames[keyFrameShow].animateBallsOnPaths(kfPos);
 		this._modified();
 	}
 
+	async downloadAnimationWebm(animFrameCallback, keyFramesNo, keyFrameDuration) {
+		// Find your SVG element
+		const pitchEdit = document.querySelector('svg');
+		let width = pitchEdit.width?.baseVal?.value || 0;
+		let height = pitchEdit.height?.baseVal?.value || 0;
+		if (width === 0 || height === 0) {
+			const rect = pitchEdit.getBoundingClientRect();
+			width = rect.width;
+			height = rect.height;
+		}
+
+		// Create and add canvas to DOM (hidden)
+		const canvas = document.createElement('canvas');
+		canvas.width = width;
+		canvas.height = height;
+		canvas.style.position = 'fixed';
+		canvas.style.left = '-9999px';
+		document.body.appendChild(canvas);
+
+		const ctx = canvas.getContext('2d');
+		const stream = canvas.captureStream();
+		const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+		let chunks = [];
+
+		recorder.ondataavailable = e => chunks.push(e.data);
+		recorder.onstop = () => {
+			const blob = new Blob(chunks, { type: 'video/webm' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'animation.webm';
+			a.click();
+			URL.revokeObjectURL(url);
+			document.body.removeChild(canvas); // Clean up
+		};
+
+		recorder.start();
+
+		for (let i = 0; i < keyFramesNo; i++) {
+			if (animFrameCallback) {
+				animFrameCallback(i * keyFrameDuration);
+			}
+			await new Promise(resolve => setTimeout(resolve, 100)); // Let browser render SVG
+
+			// Convert SVG to image
+			const svgData = new XMLSerializer().serializeToString(pitchEdit);
+			const img = new window.Image();
+			img.src = 'data:image/svg+xml;base64,' + window.btoa(svgData);
+
+			await new Promise(resolve => { img.onload = () => resolve(); });
+
+			ctx.clearRect(0, 0, width, height);
+			ctx.drawImage(img, 0, 0, width, height);
+
+			// Wait for frameDuration so recorder can capture this frame
+			await new Promise(resolve => setTimeout(resolve, keyFrameDuration * 1000));
+		}
+
+		recorder.stop();
+	}
 	// note: only move current key frame player
 	playerMove(id, deltaX, deltaY) {
 		let players = this.playersCurrentKeyFrame().map(p => {

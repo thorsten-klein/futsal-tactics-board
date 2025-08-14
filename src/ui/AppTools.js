@@ -75,6 +75,8 @@ class AppTools extends Component {
 					keyFramePrevious={this.props.animKeyFramePrevious}
 					keyFrameDurationSet={this.props.animKeyFrameDurationSet}
 					animPlayerShow={this.props.animPlayerShow}
+					animDownloadGif={this.props.animDownloadGif}
+					animDownloadVideo={this.props.animDownloadVideo}
 				/>
 			</React.Fragment>
 		);
@@ -166,6 +168,8 @@ AppTools.defaultProps = {
 	animKeyFramePrevious: null,
 	keyFrameDurationSet: null,
 	animPlayerShow: null,
+	animDownloadGif: null,
+	animDownloadVideo: null,
 	extrasCreate: null,
 	toggleDrawer: null,
 	shareTactics: null,
@@ -190,6 +194,8 @@ AppTools.propTypes = {
 	animKeyFramePrevious: PropTypes.func,
 	keyFrameDurationSet: PropTypes.func,
 	animPlayerShow: PropTypes.func,
+	animDownloadGif: PropTypes.func,
+	animDownloadVideo: PropTypes.func,
 	extrasCreate: PropTypes.func,
 	toggleDrawer: PropTypes.func,
 	shareTactics: PropTypes.func,

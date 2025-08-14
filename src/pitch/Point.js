@@ -9,8 +9,8 @@ class Point {
 	}
 
 	move(deltaX, deltaY) {
-		this.x += deltaX;
-		this.y += deltaY;
+		this.x = Math.round(this.x + deltaX);
+		this.y = Math.round(this.y + deltaY);
 	}
 
 	clone() {
@@ -19,8 +19,8 @@ class Point {
 
 	save() {
 		return {
-			x: this.x,
-			y: this.y
+			x: Math.round(this.x),
+			y: Math.round(this.y)
 		}
 	}
 }

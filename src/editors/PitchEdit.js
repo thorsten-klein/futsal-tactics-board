@@ -13,6 +13,7 @@ import ExtrasEdit from './ExtrasEdit'
 import PlayerDialog from './PlayerDialog'
 import ContextMenu from './ContextMenu';
 import PositionBox from '../ui/PositionBox';
+import PositionEditDialog from './PositionEditDialog';
 
 // this is for offset from toolbar and default class
 const styles = theme => ({
@@ -86,8 +87,31 @@ class PitchEdit extends Component {
 	}
 
 	state = {
-        selectedElement: null
+        selectedElement: null,
+		positionDialogOpen: false
     };
+
+	// Handler to open dialog
+	handlePositionBoxClick = () => {
+		this.setState({ positionDialogOpen: true });
+	};
+
+	// Handler to close dialog
+	handlePositionDialogClose = () => {
+		this.setState({ positionDialogOpen: false });
+	};
+
+	// Handler to save new position
+	handlePositionDialogSave = (newX, newY) => {
+		const { selectedElement } = this.state;
+		if (selectedElement) {
+			selectedElement.x = newX;
+			selectedElement.y = newY;
+			// You may need to trigger a re-render or update the pitch/player here
+			// For example, call a method to update the player position in your model
+		}
+		this.setState({ positionDialogOpen: false });
+	};
 
 	getScale() {
 		const box = this._bgRef.current.getBoundingClientRect();
@@ -645,7 +669,20 @@ class PitchEdit extends Component {
 			<PlayerDialog ref={this._playerDialogRef} onEditDone={this.playerEditDone} />
 			<ContextMenu ref={this._contextMenuRef} onClose={this.hContextMenuClose} />
 			{ this.state.selectedElement &&
-				<PositionBox element={this.state.selectedElement} /> }
+				<>
+					<PositionBox
+						element={this.state.selectedElement}
+						onClick={this.handlePositionBoxClick}
+					/>
+					<PositionEditDialog
+						open={this.state.positionDialogOpen}
+						x={this.state.selectedElement.x}
+						y={this.state.selectedElement.y}
+						onClose={this.handlePositionDialogClose}
+						onSave={this.handlePositionDialogSave}
+					/>
+				</>
+			}
 			</React.Fragment>
 		);
 	}

@@ -41,7 +41,7 @@ class ContextMenu extends Component {
 				anchorPosition={this.state.objectID !== null ? { top: this.state.y, left: this.state.x } : undefined}>
 				<MenuItem data-value="edit" disabled={!this.state.isEditable} onClick={this.close}>
 					<ListItemIcon><EditIcon /></ListItemIcon>
-					<ListItemText primary="Edit" />
+					<ListItemText primary="Enable Edit Mode" />
 				</MenuItem>
 				<Divider />
 				<MenuItem data-value="delete" onClick={this.close}>

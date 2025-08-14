@@ -543,7 +543,7 @@ class PitchEdit extends Component {
 					</g>
 					<g id="pitch" transform={pitchTransform} fill="#0280c6" stroke="white" strokeWidth="8">
 						<rect width="4000" height="2000" />
-						{this.renderCenterAD(1700,700,600,600)}
+						{this.renderCenterAD(1750,750,500,500)}
 						<line x1="2000" x2="2000" y1="0" y2="2000" />
 						<circle r="300" cx="2000" cy="1000" fill="none" />
 						<circle r="12" cx="2000" cy="1000" fill="white" strokeWidth="0" />

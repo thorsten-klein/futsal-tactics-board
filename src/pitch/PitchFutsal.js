@@ -753,9 +753,8 @@ class PitchFutsal {
 			return !e.isEdit;
 		}
 		if (id.startsWith(ElementIDPrefix.Extras)) {
-			const e = this.extras.find(ex => id === ex.id);
-			// not all extras is editable
-			return (e.isResizable || e.isRotatable) && !e.isEdit;
+			// all extras is editable, since they are at least movable
+			return true;
 		}
 		return false;
 	}

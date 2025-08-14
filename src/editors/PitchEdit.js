@@ -12,6 +12,7 @@ import TextEdit from './TextEdit'
 import ExtrasEdit from './ExtrasEdit'
 import PlayerDialog from './PlayerDialog'
 import ContextMenu from './ContextMenu';
+import PositionBox from '../ui/PositionBox';
 
 // this is for offset from toolbar and default class
 const styles = theme => ({
@@ -83,6 +84,10 @@ class PitchEdit extends Component {
 		// callbacks
 		this.playerEditDone = this.playerEditDone.bind(this);
 	}
+
+	state = {
+        selectedElement: null
+    };
 
 	getScale() {
 		const box = this._bgRef.current.getBoundingClientRect();
@@ -161,12 +166,28 @@ class PitchEdit extends Component {
 
 	objectDrag(posX, posY, deltaX, deltaY, snap) {
 		const p = this.props.pitch;
+
+		// reset the active Player
+		this.setState({ selectedElement: null });
+
 		switch (this._dragObjectType) {
 			case DragObject.Player:
 				p.playerMove(this._dragNode, deltaX, deltaY);
+
+				// Find the player being dragged and set as active
+				const players = p.playersCurrentKeyFrame();
+				const draggedPlayer = Array.isArray(players)
+					? players.find(pl => pl.id === this._dragNode)
+					: null;
+				this.setState({ selectedElement: draggedPlayer.pos || null });
 				break;
 			case DragObject.Ball:
 				p.ballMove(this._dragNode, deltaX, deltaY);
+				const balls = p.ballsCurrentKeyFrame();
+				const draggedBall = Array.isArray(balls)
+					? balls.find(b => b.id === this._dragNode)
+					: null;
+				this.setState({ selectedElement: draggedBall.pos || null });
 				break;
 			case DragObject.EditTopLeft:
 				p.editTopLeft(this._dragNode, deltaX, deltaY);
@@ -251,6 +272,7 @@ class PitchEdit extends Component {
 		let pos = this.getRealPosition(e);
 		const dm = this.props.drawMode;
 		const p = this.props.pitch;
+
 		switch (dm.mode) {
 			case 'line':
 				this._dragNode = p.lineCreate(
@@ -622,6 +644,8 @@ class PitchEdit extends Component {
 			</div>
 			<PlayerDialog ref={this._playerDialogRef} onEditDone={this.playerEditDone} />
 			<ContextMenu ref={this._contextMenuRef} onClose={this.hContextMenuClose} />
+			{ this.state.selectedElement &&
+				<PositionBox element={this.state.selectedElement} /> }
 			</React.Fragment>
 		);
 	}

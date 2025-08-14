@@ -28,6 +28,15 @@ class Ladder extends Component {
 		const className = -1 !== this.props.color ? 'ex' + this.props.color : null;
 		return (
 			<g className={className}>
+				<rect
+                x={xL}
+                y={yT}
+                width={w}
+                height={h}
+                fill="transparent"
+                data-ref={this.props.id}
+                style={{ cursor: "pointer" }}
+				/>
 				<line x1={xL} y1={yT} x2={xL} y2={yB} strokeWidth={sW} stroke={sC} data-ref={this.props.id} />
 				{this.steps(xL, xR, yT, h, 5, sW, sC)}
 				<line x1={xR} y1={yT} x2={xR} y2={yB} strokeWidth={sW} stroke={sC} data-ref={this.props.id} />

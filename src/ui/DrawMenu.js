@@ -32,6 +32,7 @@ import ArrowRight from 'mdi-material-ui/ArrowRight';
 import ArrowLeftRight from 'mdi-material-ui/ArrowLeftRight';
 import Minus from 'mdi-material-ui/Minus';
 import DotsHorizontal from 'mdi-material-ui/DotsHorizontal';
+import MenuOpen from '@mui/icons-material/MenuOpen';
 
 class DrawMenu extends Component {
 	constructor(props) {
@@ -219,11 +220,14 @@ class DrawMenu extends Component {
 
 		return (
 			<React.Fragment>
-				<Tooltip title="Selected draw mode">
-					<IconButton aria-label="Selected draw mode" color="inherit" onClick={this.open}>
-						{this.drawingModeIcon()}
-					</IconButton>
-				</Tooltip>
+				<IconButton aria-label="Open drawing menu" color="inherit" onClick={this.open}>
+					<Tooltip title="Current draw mode">
+							{this.drawingModeIcon()}
+					</Tooltip>
+					<Tooltip title="Open Drawing Menu">
+						<MenuOpen/>
+					</Tooltip>
+				</IconButton>
 				<Menu id="drawingMenu" anchorEl={this.state.anchorEl} keepMounted open={this.state.open} onClose={this.close}>
 					<MenuItem data-value="select" onClick={this.close}>
 						<ListItemIcon><CursorDefault /></ListItemIcon>

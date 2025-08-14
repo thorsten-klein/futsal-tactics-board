@@ -191,28 +191,11 @@ class PitchEdit extends Component {
 	objectDrag(posX, posY, deltaX, deltaY, snap) {
 		const p = this.props.pitch;
 
-		// reset the active Player
-		this.setState({ selectedElement: null });
-
 		switch (this._dragObjectType) {
 			case DragObject.Player:
 				p.playerMove(this._dragNode, deltaX, deltaY);
-
-				// Find the player being dragged and set as active
-				const players = p.playersCurrentKeyFrame();
-				const draggedPlayer = Array.isArray(players)
-					? players.find(pl => pl.id === this._dragNode)
-					: null;
-				this.setState({ selectedElement: draggedPlayer.pos || null });
-				break;
 			case DragObject.Ball:
 				p.ballMove(this._dragNode, deltaX, deltaY);
-				const balls = p.ballsCurrentKeyFrame();
-				const draggedBall = Array.isArray(balls)
-					? balls.find(b => b.id === this._dragNode)
-					: null;
-				this.setState({ selectedElement: draggedBall.pos || null });
-				break;
 			case DragObject.EditTopLeft:
 				p.editTopLeft(this._dragNode, deltaX, deltaY);
 				break;
@@ -247,6 +230,8 @@ class PitchEdit extends Component {
 				console.log("Invalid drag object type", this._dragObjectType, this._dragNode);
 				break;
 		}
+
+		this.setSelectedElement();
 	}
 
 	hContextMenu(e) {
@@ -291,11 +276,38 @@ class PitchEdit extends Component {
 		}
 	}
 
+	setSelectedElement(){
+		const p = this.props.pitch;
+
+		// Find a player being selected
+		const players = p.playersCurrentKeyFrame();
+		const draggedPlayer = Array.isArray(players)
+		? players.find(pl => pl.id === this._dragNode)
+		: null;
+		if (draggedPlayer) {
+			this.setState({ selectedElement: draggedPlayer.pos});
+			return;
+		}
+
+		// Find a ball being selected
+		const balls = p.ballsCurrentKeyFrame();
+		const draggedBall = Array.isArray(balls)
+			? balls.find(b => b.id === this._dragNode)
+			: null;
+		if (draggedBall) {
+			this.setState({ selectedElement: draggedBall.pos});
+			return;
+		}
+
+		this.setState({ selectedElement: null });
+	}
 	hMouseDown(e) {
 		e.preventDefault();
 		let pos = this.getRealPosition(e);
 		const dm = this.props.drawMode;
 		const p = this.props.pitch;
+
+		this.setSelectedElement();
 
 		switch (dm.mode) {
 			case 'line':

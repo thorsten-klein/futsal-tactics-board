@@ -129,6 +129,7 @@ class DrawerMenu extends Component {
 							</ListItemButton>
 						</ListItem>
 						<Divider />
+{/*
 						<ListItem>
 							<ListItemButton onClick={this.load} disabled={!this.props.isSignedIn}>
 								<ListItemIcon><CloudDownloadIcon /></ListItemIcon>
@@ -147,6 +148,7 @@ class DrawerMenu extends Component {
 								<ListItemText primary="Save As" />
 							</ListItemButton>
 						</ListItem>
+*/}
 						<ListItem>
 							<ListItemButton onClick={this.saveToFile}>
 								<ListItemIcon><SaveAlt /></ListItemIcon>

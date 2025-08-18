@@ -123,11 +123,13 @@ class AppTools extends Component {
 							</span>
 						</Tooltip>
 						<FullscreenToggle />
+{/*
 						<UserAccount 
 							currentUser={this.props.currentUser}
 							signIn={this.props.signIn}
 							signOut={this.props.signOut}
 						/>
+*/}
 					</Toolbar>
 				</AppBar>
 

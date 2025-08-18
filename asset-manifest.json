@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/futsal-tactics-board/static/css/main.a74e47cc.css",
+    "main.js": "/futsal-tactics-board/static/js/main.cb4e931c.js",
+    "static/js/787.429886f9.chunk.js": "/futsal-tactics-board/static/js/787.429886f9.chunk.js",
+    "static/media/wood_floor.jpg": "/futsal-tactics-board/static/media/wood_floor.89dc586a9bfe2463b6fd.jpg",
+    "index.html": "/futsal-tactics-board/index.html",
+    "main.a74e47cc.css.map": "/futsal-tactics-board/static/css/main.a74e47cc.css.map",
+    "main.cb4e931c.js.map": "/futsal-tactics-board/static/js/main.cb4e931c.js.map",
+    "787.429886f9.chunk.js.map": "/futsal-tactics-board/static/js/787.429886f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a74e47cc.css",
+    "static/js/main.cb4e931c.js"
+  ]
+}

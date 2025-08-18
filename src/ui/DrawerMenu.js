@@ -30,7 +30,7 @@ class DrawerMenu extends Component {
 		this.load = this.load.bind(this);
 		this.save = this.save.bind(this);
 		this.saveAs = this.saveAs.bind(this);
-		this.saveToFile = this.saveToFile.bind(this);
+		this.download = this.download.bind(this);
 		this.loadFromFile = this.loadFromFile.bind(this);
 		this.saveImage = this.saveImage.bind(this);
 		this.colorPaletteEdit = this.colorPaletteEdit.bind(this);
@@ -82,9 +82,9 @@ class DrawerMenu extends Component {
 		this.props.saveAs();
 	}
 
-	saveToFile() {
+	download() {
 		this.setDrawer(false);
-		this.props.saveToFile();
+		this.props.download();
 	}
 
 	loadFromFile() {
@@ -150,9 +150,9 @@ class DrawerMenu extends Component {
 						</ListItem>
 */}
 						<ListItem>
-							<ListItemButton onClick={this.saveToFile}>
+							<ListItemButton onClick={this.download}>
 								<ListItemIcon><SaveAlt /></ListItemIcon>
-								<ListItemText primary="Save to file" />
+								<ListItemText primary="Download" />
 							</ListItemButton>
 						</ListItem>
 						<ListItem>
@@ -186,7 +186,7 @@ DrawerMenu.defaultProps = {
 	load: null,
 	save: null,
 	saveAs: null,
-	saveToFile: null,
+	download: null,
 	loadFromFile: null,
 	saveImage: null,
 	newScheme: null,
@@ -201,7 +201,7 @@ DrawerMenu.propTypes = {
 	load: PropTypes.func,
 	save: PropTypes.func,
 	saveAs: PropTypes.func,
-	saveToFile: PropTypes.func,
+	download: PropTypes.func,
 	loadFromFile: PropTypes.func,
 	saveImage: PropTypes.func,
 	newScheme: PropTypes.func,

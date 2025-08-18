@@ -46,7 +46,7 @@ class App extends Component {
 		// event handlers
 		this.ToggleDrawer = this.ToggleDrawer.bind(this);
 		this.SaveImage = this.SaveImage.bind(this);
-		this.SaveToFile = this.SaveToFile.bind(this);
+		this.Download = this.Download.bind(this);
 		this.LoadFromFile = this.LoadFromFile.bind(this);
 		this.NewScheme = this.NewScheme.bind(this);
 		this.NewAnimation = this.NewAnimation.bind(this);
@@ -240,7 +240,7 @@ class App extends Component {
 		);
 	}
 
-	SaveToFile() {
+	Download() {
 		const tactics = this.LocalStorageSave(); // get current tactics with settings
 
 		const jsonStr = JSON.stringify(tactics, null, 2);
@@ -629,7 +629,7 @@ class App extends Component {
 				<ThemeProvider theme={this.appTheme}>
 					<AppTools drawMode={this.state.drawMode}
 						saveImage={this.SaveImage}
-						saveToFile={this.SaveToFile}
+						download={this.Download}
 						loadFromFile={this.LoadFromFile}
 						animExists={this.state.pitch.AnimExists}
 						animKeyFrameCurrent={this.state.pitch.AnimKeyFrameCurrent}
@@ -657,7 +657,7 @@ class App extends Component {
 						save={this.showSaveDialog}
 						saveAs={this.showSaveAsDialog}
 						saveImage={this.SaveImage} 
-						saveToFile={this.SaveToFile}
+						download={this.Download}
 						loadFromFile={this.LoadFromFile}
 						newScheme={this.NewScheme}
 						newAnimation={this.NewAnimation}

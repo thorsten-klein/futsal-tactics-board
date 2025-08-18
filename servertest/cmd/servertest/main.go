@@ -17,8 +17,8 @@ import (
 )
 
 // content is static web server content.
-// cp -r ../../../build/ ./tactics-board
-/////go:embed tactics-board
+// cp -r ../../../build/ ./futsal-tactics-board
+/////go:embed futsal-tactics-board
 //var content embed.FS
 
 //go:embed login.html
@@ -59,12 +59,12 @@ func main() {
 	}
 
 	// Handle embedded, must be in folder below command folder
-	//http.Handle("/tactics-board/", http.StripPrefix("/tactics-board/", http.FileServer(http.FS(content))))
-	// Must not strip prefix because react is configured to home route /tactics-board
-	//http.Handle("/tactics-board/", http.FileServer(http.FS(content)))
+	//http.Handle("/futsal-tactics-board/", http.StripPrefix("/futsal-tactics-board/", http.FileServer(http.FS(content))))
+	// Must not strip prefix because react is configured to home route /futsal-tactics-board
+	//http.Handle("/futsal-tactics-board/", http.FileServer(http.FS(content)))
 
 	// Handle direct from build folder
-	http.Handle("/tactics-board/", http.StripPrefix("/tactics-board", http.FileServer(http.Dir("../../../build"))))
+	http.Handle("/futsal-tactics-board/", http.StripPrefix("/futsal-tactics-board", http.FileServer(http.Dir("../../../build"))))
 
 	// Handle uploaded files from uploads folder
 	http.Handle("/uploads/", http.StripPrefix("/uploads", http.FileServer(http.Dir("./uploads"))))

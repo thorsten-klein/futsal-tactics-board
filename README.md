@@ -1,5 +1,9 @@
 # Tactics board
-Project for futsal Tactics board [preview](https://gljubojevic.github.io/tactics-board)
+Original project for futsal Tactics board [preview](https://gljubojevic.github.io/tactics-board)
+
+
+**Adapted project for futsal Tactics board [preview](https://thorsten-klein.github.io/futsal-tactics-board)**
+
 
 Reference for project is https://tactical-board.com/uk/mini-football  
 **All features there are required here too**

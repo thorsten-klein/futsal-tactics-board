@@ -16,7 +16,8 @@ const ExtrasType = {
 	Ladder: 2,
 	Cone: 3,
 	Flag: 4,
-	Pole: 5
+	Pole: 5,
+	Plate: 6
 };
 
 const ExtrasDefaults = [
@@ -25,7 +26,8 @@ const ExtrasDefaults = [
 	{ name:'Ladder', width: 100, height: 350, viewBoxScale: 1 },
 	{ name:'Cone', width: 70, height: 85, viewBoxScale: 3 },
 	{ name:'Flag', width: 130, height: 280, viewBoxScale: 2 },
-	{ name:'Pole', width: 40, height: 250, viewBoxScale: 1 }
+	{ name:'Pole', width: 40, height: 250, viewBoxScale: 1 },
+	{ name:'Plate', width: 50, height: 50, viewBoxScale: 2 }
 ];
 
 function RemoveTags(str) {

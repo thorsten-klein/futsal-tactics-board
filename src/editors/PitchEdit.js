@@ -39,7 +39,8 @@ const DragObject = {
 	EditLineC1: 11,
 	EditLineC2: 12,
 	EditLineP2: 13,
-	Pole: 14
+	Pole: 14,
+	Plate: 15
 };
 
 // defines way to check draggable object

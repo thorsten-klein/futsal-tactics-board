@@ -6,6 +6,7 @@ import Ladder from './Ladder';
 import Cone from './Cone';
 import Pole from './Pole';
 import Flag from './Flag';
+import Plate from './Plate';
 import Extras from '../pitch/Extras';
 import { ExtrasType } from '../pitch/Constants';
 
@@ -31,6 +32,9 @@ class ExtrasEdit extends Component {
 				return (<Cone id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} />);
 			case ExtrasType.Pole:
 				return (<Pole id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} />);
+			case ExtrasType.Plate:
+				ex.color = 2; // default color for Plate
+				return (<Plate id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} />);
 			case ExtrasType.Flag:
 				return (<Flag id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} strokeWidth={12} />);
 			default:

@@ -32,6 +32,7 @@ class Extras {
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
 			case ExtrasType.Pole:
+			case ExtrasType.Plate:
 				return true;
 			case ExtrasType.Goal:
 			case ExtrasType.GoalSmall:
@@ -50,6 +51,7 @@ class Extras {
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
 			case ExtrasType.Pole:
+			case ExtrasType.Plate:
 			default:
 				return false;
 		}
@@ -64,6 +66,7 @@ class Extras {
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
 			case ExtrasType.Pole:
+			case ExtrasType.Plate:
 			default:
 				return false;
 		}

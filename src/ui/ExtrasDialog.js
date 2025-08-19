@@ -4,6 +4,7 @@ import Goal from '../editors/Goal';
 import Ladder from '../editors/Ladder';
 import Cone from '../editors/Cone';
 import Pole from '../editors/Pole';
+import Plate from '../editors/Plate';
 import Flag from '../editors/Flag';
 import { ExtrasDefaults, ExtrasType } from '../pitch/Constants';
 import withStyles from '@mui/styles/withStyles';
@@ -65,6 +66,8 @@ class ExtrasDialog extends Component {
 				return (<Cone x={x} y={y} width={def.width} height={def.height} />);
 			case ExtrasType.Pole:
 				return (<Pole x={x} y={y+75} width={def.width} height={def.height} />);
+			case ExtrasType.Plate:
+				return (<Plate x={x} y={y} width={def.width} height={def.height} color={2} />);
 			case ExtrasType.Flag:
 				return (<Flag x={x} y={y} width={def.width} height={def.height} />);
 			default:
@@ -83,7 +86,7 @@ class ExtrasDialog extends Component {
 	}
 
 	renderRadios() {
-		const allExtras = [ExtrasType.Goal, ExtrasType.GoalSmall, ExtrasType.Ladder, ExtrasType.Cone, ExtrasType.Flag, ExtrasType.Pole];
+		const allExtras = [ExtrasType.Goal, ExtrasType.GoalSmall, ExtrasType.Ladder, ExtrasType.Cone, ExtrasType.Flag, ExtrasType.Pole, ExtrasType.Plate];
 		return allExtras.map((val, index) => {
 			const ico = this.radioIcon(val);
 			const def = ExtrasDefaults[val];

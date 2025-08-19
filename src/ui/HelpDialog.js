@@ -101,6 +101,7 @@ class HelpDialog extends Component {
 								<li>Ladder</li>
 								<li>Cone</li>
 								<li>Flag</li>
+								<li>Pole</li>
 							</ul>
 						</li>
 						<li><Palette/> <b>Color</b> currently selected drawing color</li>

@@ -31,6 +31,7 @@ class Extras {
 		switch (this.t) {
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
+			case ExtrasType.Pole:
 				return true;
 			case ExtrasType.Goal:
 			case ExtrasType.GoalSmall:
@@ -48,6 +49,7 @@ class Extras {
 			case ExtrasType.GoalSmall:
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
+			case ExtrasType.Pole:
 			default:
 				return false;
 		}
@@ -61,6 +63,7 @@ class Extras {
 				return true;
 			case ExtrasType.Cone:
 			case ExtrasType.Flag:
+			case ExtrasType.Pole:
 			default:
 				return false;
 		}

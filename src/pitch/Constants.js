@@ -15,7 +15,8 @@ const ExtrasType = {
 	GoalSmall: 1,
 	Ladder: 2,
 	Cone: 3,
-	Flag: 4
+	Flag: 4,
+	Pole: 5
 };
 
 const ExtrasDefaults = [
@@ -23,7 +24,8 @@ const ExtrasDefaults = [
 	{ name:'Small Goal', width: 50, height: 150, viewBoxScale: 2 },
 	{ name:'Ladder', width: 100, height: 350, viewBoxScale: 1 },
 	{ name:'Cone', width: 70, height: 85, viewBoxScale: 3 },
-	{ name:'Flag', width: 130, height: 280, viewBoxScale: 2 }
+	{ name:'Flag', width: 130, height: 280, viewBoxScale: 2 },
+	{ name:'Pole', width: 40, height: 120, viewBoxScale: 1 }
 ];
 
 function RemoveTags(str) {

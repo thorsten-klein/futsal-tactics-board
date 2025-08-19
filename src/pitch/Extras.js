@@ -6,8 +6,8 @@ class Extras {
 		this.id = id;
 		this.color = color;
 		this.t = t;
-		this.x = x;
-		this.y = y;
+		this.x = Math.round(x);
+		this.y = Math.round(y);
 		this.width = width;
 		this.height = height;
 		this.rotation = rotation;
@@ -112,6 +112,8 @@ class Extras {
 			default:
 				break;
 		}
+		this.x = Math.round(this.x);
+		this.y = Math.round(this.y);
 	}
 
 	rotate(posX, posY, snap) {

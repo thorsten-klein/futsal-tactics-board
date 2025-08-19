@@ -45,8 +45,8 @@ Pole.defaultProps = {
 	color: -1,
 	x: 0,
 	y: 0,
-	width: 70,
-	height: 85,
+	width: 30,
+	height: 150,
 	strokeWidth: 6
 }
 

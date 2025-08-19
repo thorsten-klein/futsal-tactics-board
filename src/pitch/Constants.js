@@ -25,7 +25,7 @@ const ExtrasDefaults = [
 	{ name:'Ladder', width: 100, height: 350, viewBoxScale: 1 },
 	{ name:'Cone', width: 70, height: 85, viewBoxScale: 3 },
 	{ name:'Flag', width: 130, height: 280, viewBoxScale: 2 },
-	{ name:'Pole', width: 40, height: 120, viewBoxScale: 1 }
+	{ name:'Pole', width: 40, height: 250, viewBoxScale: 1 }
 ];
 
 function RemoveTags(str) {

@@ -64,7 +64,7 @@ class ExtrasDialog extends Component {
 			case ExtrasType.Cone:
 				return (<Cone x={x} y={y} width={def.width} height={def.height} />);
 			case ExtrasType.Pole:
-				return (<Pole x={x} y={y} width={def.width} height={def.height} />);
+				return (<Pole x={x} y={y+75} width={def.width} height={def.height} />);
 			case ExtrasType.Flag:
 				return (<Flag x={x} y={y} width={def.width} height={def.height} />);
 			default:

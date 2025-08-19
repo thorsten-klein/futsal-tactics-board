@@ -20,7 +20,7 @@ class Cone extends Component {
 		let points = "";
 		Cone.shape.forEach(p => {
 			const x = p[0] + this.props.x;
-			const y = p[1] + this.props.y;
+			const y = p[1] + this.props.y - 30; // shift center of gravity
 			points += `${x},${y} `;
 		});
 		const fill = -1 !== this.props.color ? null : "red";

@@ -299,6 +299,16 @@ class PitchEdit extends Component {
 			return;
 		}
 
+		// Find an extra being selected
+		const extras = p.extras
+		const draggedExtra = Array.isArray(extras)
+			? extras.find(e => e.id === this._dragNode)
+			: null;
+		if (draggedExtra) {
+			this.setState({ selectedElement: draggedExtra});
+			return;
+		}
+
 		this.setState({ selectedElement: null });
 	}
 	hMouseDown(e) {

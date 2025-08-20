@@ -106,7 +106,9 @@ class AppTools extends Component {
 								{this.props.boardName || 'Untitled'}
 							</span>
 						</Typography>
-						{this.renderSiteHome()}
+						{
+							//this.renderSiteHome()
+						}
 						{this.renderAnimControls()}
 						<div className={this.props.classes.grow} />
 						<DrawMenu drawMode={this.props.drawMode} extrasCreate={this.props.extrasCreate} />

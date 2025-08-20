@@ -11,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LinkIcon from '@mui/icons-material/Link';
+import EditIcon from '@mui/icons-material/Edit';
 import DrawMenu from './DrawMenu';
 import FullscreenToggle from './FullscreenToggle';
 import AnimControls from './AnimControls';
@@ -101,13 +102,23 @@ class AppTools extends Component {
 						<IconButton edge="start" color="inherit" aria-label="menu" onClick={this.props.toggleDrawer}>
 							<MenuIcon />
 						</IconButton>
+						<Typography variant="h6" color="inherit" style={{ marginRight: 20 }}>
+							Futsal Tactics Board
+						</Typography>
 						<Typography variant="h6" color="inherit">
-							Futsal tactics board — <span className={this.props.classes.clickableName} onClick={this.openNameDialog}>
-								{this.props.boardName || 'Untitled'}
-							</span>
+							<Tooltip title="Edit board name">
+								<span
+									className={this.props.classes.clickableName}
+									onClick={this.openNameDialog}
+									style={{ display: 'inline-flex', alignItems: 'center' }}
+								>
+									{this.props.boardName || 'Untitled'}
+									<EditIcon style={{ marginLeft: 6, fontSize: '1em' }} />
+								</span>
+							</Tooltip>
 						</Typography>
 						{
-							//this.renderSiteHome()
+							// this.renderSiteHome()
 						}
 						{this.renderAnimControls()}
 						<div className={this.props.classes.grow} />
@@ -117,13 +128,13 @@ class AppTools extends Component {
 								<HelpCenterIcon />
 							</IconButton>
 						</Tooltip>
-						<Tooltip title="Share link">
+						{/* <Tooltip title="Share link">
 							<span>
 								<IconButton aria-label="Share link" color="inherit" disabled={!this.props.shareEnabled} onClick={this.props.shareTactics}>
 									<LinkIcon />
 								</IconButton>
 							</span>
-						</Tooltip>
+						</Tooltip> */}
 						<FullscreenToggle />
 {/*
 						<UserAccount 

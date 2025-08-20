@@ -33,7 +33,6 @@ class ExtrasEdit extends Component {
 			case ExtrasType.Pole:
 				return (<Pole id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} />);
 			case ExtrasType.Plate:
-				ex.color = 2; // default color for Plate
 				return (<Plate id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} />);
 			case ExtrasType.Flag:
 				return (<Flag id={ex.id} color={ex.color} x={ex.x} y={ex.y} width={ex.width} height={ex.height} strokeWidth={12} />);

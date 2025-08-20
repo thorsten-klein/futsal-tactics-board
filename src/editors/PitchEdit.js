@@ -56,7 +56,8 @@ const DragObjectCheck = [
 	{prefix: "edit-l1-", removePrefix: true, typ:  DragObject.EditLineP1},
 	{prefix: "edit-l2-", removePrefix: true, typ:  DragObject.EditLineC1},
 	{prefix: "edit-l3-", removePrefix: true, typ:  DragObject.EditLineC2},
-	{prefix: "edit-l4-", removePrefix: true, typ:  DragObject.EditLineP2}
+	{prefix: "edit-l4-", removePrefix: true, typ:  DragObject.EditLineP2},
+	{prefix: "ex-plate-", removePrefix: false, typ:  DragObject.Plate}
 ];
 
 

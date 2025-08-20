@@ -35,6 +35,7 @@ class Plate extends Component {
                     stroke='black'
                     strokeWidth={3}
                     data-ref={id}
+                    className='draggable'
                 />
                 <circle
                     cx={x}
@@ -43,6 +44,7 @@ class Plate extends Component {
                     fill="black" // This makes the hole transparent
                     stroke="none"
                     data-ref={id}
+                    className='draggable'
                 />
             </g>
         );

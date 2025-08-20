@@ -88,7 +88,9 @@ class PitchFutsal {
 
 		// add default extras
 		const goalExtras = ExtrasDefaults[ExtrasType.Goal];
+		const plateExtras = ExtrasDefaults[ExtrasType.Plate];
 		const pPos = this.pitchPos();
+
 		// Left goal
 		this.extras.push(new Extras(
 			ElementIDPrefix.Extras + "goal-left", 0, ExtrasType.Goal,
@@ -97,6 +99,7 @@ class PitchFutsal {
 			goalExtras.width, goalExtras.height,
 			0, false
 		));
+
 		// Right Goal
 		this.extras.push(new Extras(
 			ElementIDPrefix.Extras + "goal-right", 0, ExtrasType.Goal,
@@ -105,6 +108,27 @@ class PitchFutsal {
 			goalExtras.width, goalExtras.height,
 			180, false
 		));
+
+		// create plates in different colors
+		const noPlateColors = 8;
+		const noPlates = 100;
+		const gridSize = 100;
+		const posY = pPos.top + this.heightPitch + 90;
+		let posX = pPos.left + this.widthPitch / 2;
+
+		for (var color=0; color < noPlateColors; color++) {
+			posX += gridSize;
+			for (var i = 0; i < noPlates; i++) {
+				this.extras.push(new Extras(
+					ElementIDPrefix.Extras + "-plate-" + color + "-" + i,
+					color,
+					ExtrasType.Plate,
+					posX, posY,
+					plateExtras.width, plateExtras.height,
+					0, false
+				));
+			}
+		}
 	}
 
 	_initPlayers(noPlayers, noPlayerColors, playerSize) {
@@ -753,7 +777,7 @@ class PitchFutsal {
 			return !e.isEdit;
 		}
 		if (id.startsWith(ElementIDPrefix.Extras)) {
-			// all extras is editable, since they are at least movable
+			// all extras are editable by default, since they are at least movable
 			return true;
 		}
 		return false;
